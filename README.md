@@ -3,7 +3,7 @@
 
 # Update
 
-- New name now called raspberry-
+- New name now called raspberry
 
 
 # RaspberryAPI
