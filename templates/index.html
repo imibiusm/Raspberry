@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Roblox user search</h1>
+  <form action="/search" method="get">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" required autofocus placeholder="e.g. ibialt_3" />
+    <button type="submit">Search</button>
+  </form>
+{% endblock %}

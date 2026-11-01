@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ account.name if account else username }} · Roblox user search{% endblock %}
+{% block content %}
+<style>
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .back-link {
+    margin-bottom: 20px;
+  }
+  .error-message {
+    background-color: #f8d7da;
+    padding: 20px;
+    border-radius: 5px;
+  }
+</style>
+
+<div class="container">
+  <div class="back-link"></div>
+    <a href="/">← New search</a>
+  </div>
+  {% if error %}
+    <div class="error-message">
+      <h1>Could not look up user</h1>
+      <p>Roblox did not return a profile for <strong>{{ username }}</strong>.</p>
+      <p>{{ error }}</p>
+    </div>
+  {% elif account %}
+    <div class="user-info">
+      <h1>{{ account.displayName }}</h1>
+      <dl>
+        <dt>Username</dt>
+        <dd>{{ account.name }}</dd>
+        <dt>Display name</dt>
+        <dd>{{ account.displayName }}</dd>
+        <dt>User ID</dt>
+        <dd>{{ account.id }}</dd>
+      </dl>
+    </div>
+  {% else %}
+    <div class="no-user-found">
+      <h1>No user found</h1>
+      <p>No Roblox account matched <strong>{{ username }}</strong>.</p>
+    </div>
+  {% endif %}
+{% endblock %}
