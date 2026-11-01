@@ -18,7 +18,7 @@ All endpoints use `GET` and return JSON.
   - [Node.js](#nodejs)
   - [Python](#python)
   - [Go](#go)
-  - [.NET-c)
+  - [.NET](.NET (C#))
 - [Errors](#errors)
 - [Notes](#notes)
 
