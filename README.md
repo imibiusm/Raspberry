@@ -6,8 +6,6 @@
 - New name now called raspberry-
 
 
-RoSearch has changed to Raspberry!
-
 # RaspberryAPI
 
 
