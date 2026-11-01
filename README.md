@@ -424,4 +424,5 @@ In your application, check the HTTP status before trying to use the JSON respons
 
 
 Made for developers building with Roblox data.
+**We are not associated with Roblox or partnered with them.**
 
