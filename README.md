@@ -407,7 +407,9 @@ In your application, check the HTTP status before trying to use the JSON respons
 - **Interactive API docs (Swagger):** [https://rosearch.onrender.com/docs](https://rosearch.onrender.com/docs)
 - **Alternative API docs (ReDoc):** [https://rosearch.onrender.com/redoc](https://rosearch.onrender.com/redoc)
 - **GitHub repository:** [imibiusm/RoSearch](https://github.com/imibiusm/RoSearch)
+- **Discord Support:** [Discord](https://discord.gg/DVwPNPhsm7)
 
 ---
 
 Made for developers building with Roblox data.
+
