@@ -1,6 +1,12 @@
 
 ![My Image](RASPBERRY.png)
 
+#Update
+
+**New name**
+
+RoSearch has changed to Raspberry!
+
 # RaspberryAPI
 
 
@@ -13,6 +19,7 @@ https://rosearch.onrender.com
 ```
 
 All endpoints use `GET` and return JSON.
+
 
 ## Table of contents
 
