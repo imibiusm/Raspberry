@@ -1,7 +1,8 @@
 
 ![My Image](RASPBERRY.png)
 
-# RoSearch API
+# RaspberryAPI
+
 
 A simple REST API for retrieving **Roblox user and experience data**. Use RoSearch from any programming language that can make HTTP requests—no Roblox cookies, API keys, or SDK required.
 
