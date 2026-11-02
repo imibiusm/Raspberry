@@ -40,7 +40,9 @@ All endpoints use `GET` and return JSON.
 | `GET` | `/avatar/{username}` | Get the account username, user ID, and avatar headshot image URL. |
 | `GET` | `/description/{username}` | Get the account username, user ID, and profile description (About section). |
 | `GET` | `/user/{username}` | Get a combined profile containing the user ID, username, display name, avatar URL, and description. |
-| `GET` | `/get_game_info/{game_name}` | Search Roblox experiences by name and return information and vote counts for the first matching game result. |
+| `GET` | `/get_game_info/{game_name}` | Search Roblox experiences by name and return information and vote counts for the first matching
+| `GET` | `/get_game_owner/{game_name}` | Search Roblox experiences by name and return who is owner or the group who owns it. 
+game result. |
 
 Replace each path parameter with the value you want to look up.
 
