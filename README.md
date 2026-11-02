@@ -122,6 +122,21 @@ Searches Roblox experiences using the supplied name and returns data for the fir
 | `upvotes` | Upvote count |
 | `downvotes` | Downvote count |
 
+### 6. Get Roblox game owner information
+
+```http
+GET https://rosearch.onrender.com/get_game_owner/{game_name}
+```
+
+Searches Roblox experiences using the supplied name and returns data for the first matching game result.
+
+| Field | Description |
+|---|---|
+| `ID` | Roblox owner ID or Group ID |
+| `name` | Experience name |
+| `type` | Either will be Group or roblox user |
+
+
 **Important:** URL-encode game names when they contain spaces or reserved URL characters. For example, `Adopt Me!` becomes `Adopt%20Me%21`. The client examples below encode path parameters for you.
 
 ## Response examples
@@ -161,6 +176,16 @@ These examples show the response shape. IDs, names, URLs, descriptions, and stat
   "favorites": 45678,
   "upvotes": 10000,
   "downvotes": 500
+}
+```
+
+**Game owner response**
+
+```json
+{
+  "id": 4328109,
+  "name": "Police Roleplay Community",
+  "type": "Group"
 }
 ```
 
