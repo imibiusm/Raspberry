@@ -1,6 +1,7 @@
 
-import httpx
 import fastapi
+import httpx
+from fastapi import HTTPException, FastAPI
 import uvicorn
 import uuid
 
@@ -26,10 +27,10 @@ async def get_roblox_user(username: str):
         response.raise_for_status()
         data = response.json()
 
-        if not data.get("data"):
-            return None
+    if not data.get("data"):
+        return None
 
-        return data["data"][0]
+    return data["data"][0]
 
 
 async def get_roblox_avatar(user_id: int):
@@ -51,10 +52,10 @@ async def get_roblox_avatar(user_id: int):
         response.raise_for_status()
         data = response.json()
 
-        if not data.get("data"):
-            return None
+    if not data.get("data"):
+        return None
 
-        return data["data"][0]["imageUrl"]
+    return data["data"][0]["imageUrl"]
 
 
 async def get_roblox_user_description(user_id: int):
@@ -70,7 +71,7 @@ async def get_roblox_user_description(user_id: int):
         response.raise_for_status()
         data = response.json()
 
-        return data["description"]
+    return data["description"]
 
 
 async def search_game_by_name(game_name: str):
@@ -148,6 +149,9 @@ async def search_game_by_name(game_name: str):
         votes_resp.raise_for_status()
         votes_data = votes_resp.json()
 
+        # 5. Get Studio or owner
+        creator_info = game_info.get("creator", {})
+
         return {
             "universe_id": universe_id,
             "name": game_info.get("name"),
@@ -155,7 +159,12 @@ async def search_game_by_name(game_name: str):
             "visits": game_info.get("visits"),
             "favorites": game_info.get("favoritedCount"),
             "upvotes": votes_data.get("upVotes"),
-            "downvotes": votes_data.get("downVotes")
+            "downvotes": votes_data.get("downVotes"),
+            "Owner": {
+                "id": creator_info.get("id"),
+                "name": creator_info.get("name"),
+                "type": creator_info.get("type")
+            }
         }
 
 
@@ -245,6 +254,16 @@ async def get_info(game_name: str):
         )
 
     return game
+
+
+@app.get("/get_game_owner/{game_name}")
+async def get_game_owner(game_name: str):
+    game_data = await search_game_by_name(game_name)
+
+    if not game_data:
+        raise HTTPException(status_code=404, detail="Game not found")
+
+    return game_data["Owner"]
 
 
 if __name__ == "__main__":
