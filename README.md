@@ -1,9 +1,6 @@
 
 ![My Image](RASPBERRY.png)
 
-# Update
-
-- New name now called raspberry
 
 
 # RaspberryAPI
