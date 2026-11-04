@@ -10,6 +10,7 @@ app = fastapi.FastAPI()
 HEADERS = {"User-Agent": "roblox-user-searcher"}
 
 
+# 1. Get Roblox user
 async def get_roblox_user(username: str):
     async with httpx.AsyncClient(
         timeout=15.0,
@@ -27,12 +28,13 @@ async def get_roblox_user(username: str):
         response.raise_for_status()
         data = response.json()
 
-    if not data.get("data"):
-        return None
+        if not data.get("data"):
+            return None
 
-    return data["data"][0]
+        return data["data"][0]
 
 
+# 2. Get Roblox avatar
 async def get_roblox_avatar(user_id: int):
     async with httpx.AsyncClient(
         timeout=15.0,
@@ -52,12 +54,13 @@ async def get_roblox_avatar(user_id: int):
         response.raise_for_status()
         data = response.json()
 
-    if not data.get("data"):
-        return None
+        if not data.get("data"):
+            return None
 
-    return data["data"][0]["imageUrl"]
+        return data["data"][0]["imageUrl"]
 
 
+# 3. Get Roblox user description
 async def get_roblox_user_description(user_id: int):
     async with httpx.AsyncClient(
         timeout=15.0,
@@ -71,7 +74,8 @@ async def get_roblox_user_description(user_id: int):
         response.raise_for_status()
         data = response.json()
 
-    return data["description"]
+        return data.get("description", "")
+
 
 
 async def search_game_by_name(game_name: str):
@@ -119,10 +123,8 @@ async def search_game_by_name(game_name: str):
             return None
 
         # 3. Get game information
-        stats_url = "https://games.roblox.com/v1/games"
-
         stats_resp = await client.get(
-            stats_url,
+            "https://games.roblox.com/v1/games",
             params={"universeIds": universe_id},
             headers=headers
         )
@@ -136,25 +138,22 @@ async def search_game_by_name(game_name: str):
         game_info = stats_data["data"][0]
 
         # 4. Get game votes
-        votes_url = (
-            f"https://games.roblox.com/v1/games/"
-            f"{universe_id}/votes"
-        )
-
         votes_resp = await client.get(
-            votes_url,
+            f"https://games.roblox.com/v1/games/{universe_id}/votes",
             headers=headers
         )
 
         votes_resp.raise_for_status()
         votes_data = votes_resp.json()
 
-        # 5. Get Studio or owner
+        # 5. Get creator information
         creator_info = game_info.get("creator", {})
 
+        # 6. Return game information
         return {
             "universe_id": universe_id,
             "name": game_info.get("name"),
+            "description": game_info.get("description"),
             "playing": game_info.get("playing"),
             "visits": game_info.get("visits"),
             "favorites": game_info.get("favoritedCount"),
@@ -166,6 +165,7 @@ async def search_game_by_name(game_name: str):
                 "type": creator_info.get("type")
             }
         }
+
 
 
 @app.get("/search/{username}")
@@ -261,7 +261,10 @@ async def get_game_owner(game_name: str):
     game_data = await search_game_by_name(game_name)
 
     if not game_data:
-        raise HTTPException(status_code=404, detail="Game not found")
+        raise HTTPException(
+            status_code=404,
+            detail="Game not found"
+        )
 
     return game_data["Owner"]
 

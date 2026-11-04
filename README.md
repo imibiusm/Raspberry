@@ -113,6 +113,7 @@ Searches Roblox experiences using the supplied name and returns data for the fir
 |---|---|
 | `universe_id` | Roblox experience universe ID |
 | `name` | Experience name |
+| `Description` | game description |
 | `playing` | Current number of players reported by Roblox |
 | `visits` | Total visits reported by Roblox |
 | `favorites` | Favorite count |
